@@ -1,7 +1,6 @@
 import { connectToDB } from '@utils/database';
 import Prompt from '@models/prompt';
 
-
 // lambda function --> terminates after its done its job
 export const POST = async (req, res) => {
   // extracted data from POST request
