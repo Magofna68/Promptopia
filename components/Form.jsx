@@ -38,8 +38,8 @@ const Form = ({
           </span>
           <input
             value={post.tag}
-            onChange={(e) => { setPost({...post, tag: e.target.value})}}
-            placeholder='#tag'
+            onChange={(e) => { setPost({...post, tag: e.target.value}, console.log(post.tag))}}
+            placeholder='tag'
             required
             className='form_input'
           />
