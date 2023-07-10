@@ -12,6 +12,10 @@ const PromptSchema = new Schema({
   tag: {
     type: String,
     required: [true, "Tag is required."]
+  },
+  tagList: {
+    type: [String],
+    required: [true, "Enter at least 1 tag."]
   }
 });
 

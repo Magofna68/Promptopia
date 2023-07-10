@@ -4,7 +4,7 @@ import Prompt from '@models/prompt';
 // lambda function --> terminates after its done its job
 export const POST = async (req, res) => {
   // extracted data from POST request
-  const { userId, prompt, tag} = await req.json();
+  const { userId, prompt, tag, tagList} = await req.json();
 
   try {
     await connectToDB();
@@ -12,6 +12,7 @@ export const POST = async (req, res) => {
       creator: userId,
       prompt,
       tag,
+      tagList,
     })
 
     await newPrompt.save();

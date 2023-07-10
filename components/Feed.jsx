@@ -15,6 +15,7 @@ const PromptCardList = ({data, handleTagClick, searchQueryList, showSearch, setS
   }
 }, [searchQueryList, showSearch])
 
+  console.log("Posts: ", data)
 
   console.log("searchQueryList: ", searchQueryList)
   return (
@@ -49,18 +50,19 @@ const Feed = () => {
 
   const handleSearchChange = (e) => {
     // e.preventDefault();
-    console.log("E: ", e)
-    console.log("AllPosts: ", allPosts)
+    // console.log("E: ", e)
+    // console.log("AllPosts: ", allPosts)
     let searchedValue = e.target.value;
     
     setSearchText(searchedValue);
+    console.log("SearchText: ", searchText)
     handleQuery(searchedValue, allPosts);
-    // displayResults();
-    console.log("AllPosts: ", allPosts)
+    // console.log("AllPosts: ", allPosts)
   }
 
   const displayResults = (searchQueryList, allPosts) => {
     let finalResults = []
+    console.log("SearchQueryList: ", searchQueryList)
     searchQueryList?.forEach(query => {
       let results = allPosts.filter(post => post._id.includes(query));
       finalResults = finalResults.concat(results)
@@ -69,18 +71,29 @@ const Feed = () => {
   };
 
   const handleQuery = (searchedValue, allPosts) => {
-    const searchTransformed = '#' + searchedValue.toLowerCase();
-    console.log("handleQuery: ", searchedValue)
-    const filteredPosts = allPosts?.filter(post => {
-      const splitTags = post.tag.toLowerCase().split(" ");
-      return splitTags.includes(searchTransformed);
-    });
-  
-    const tagIds = filteredPosts?.map(post => post._id);
-  
+    const searchTransformed = searchedValue.toLowerCase();
+
+    let tagIds = [];
+    for (let i = 0; i < allPosts.length; i++) {
+      allPosts[i].tagList.forEach(tag => {
+        if (tag === searchTransformed) {
+          tagIds.push(allPosts[i]._id);
+        } else {
+          console.log("Tag: ", tag);
+        }
+      });
+    }
     const displayQuery = displayResults(tagIds, allPosts);
-    setSearchQueryList(displayQuery)
+    setSearchQueryList(displayQuery);
     displayResults();
+    return tagIds;
+    // console.log("TempArray: ", tempArray);
+  
+    // const tagIds = filteredPosts?.map(post => post._id);
+  
+    // setSearchQueryList(displayQuery)
+    // displayResults();
+    // console.log("searchQueryList", searchQueryList)
   };
 
   useEffect(() => {
