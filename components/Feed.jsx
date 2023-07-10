@@ -49,9 +49,7 @@ const Feed = () => {
   const [ showSearch, setShowSearch ] = useState(false);
 
   const handleSearchChange = (e) => {
-    // e.preventDefault();
-    // console.log("E: ", e)
-    // console.log("AllPosts: ", allPosts)
+    setSearchText("");
     let searchedValue = e.target.value;
     
     setSearchText(searchedValue);
@@ -70,8 +68,19 @@ const Feed = () => {
     return finalResults
   };
 
-  const handleQuery = (searchedValue, allPosts) => {
+  const handleQuery = (searchedValue, allPosts, tagClick) => {
+    if (tagClick === true) { 
+      setSearchText("")
+      const searchTransformed = searchedValue.tag.toLowerCase();
+      setSearchText(searchedValue.tag)
+  } else {
+    setSearchText(searchedValue)
+    console.log("SearchedValue: ", searchText)
     const searchTransformed = searchedValue.toLowerCase();
+    console.log("handleTagClick", searchedValue)
+
+  }
+    console.log("TAG Click: ", searchedValue.tag, tagClick)
 
     let tagIds = [];
     for (let i = 0; i < allPosts.length; i++) {
@@ -126,7 +135,7 @@ const Feed = () => {
       </form>
       <PromptCardList 
         data={allPosts}
-        handleTagClick={(e) => {handleQuery(e, allPosts)}}
+        handleTagClick={(e) => {handleQuery(e, allPosts, true)}}
         searchQueryList={searchQueryList}
         showSearch={showSearch}
         setShowSearch={setShowSearch}
