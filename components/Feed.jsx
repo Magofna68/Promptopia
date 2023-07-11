@@ -15,9 +15,9 @@ const PromptCardList = ({data, handleTagClick, searchQueryList, showSearch, setS
   }
 }, [searchQueryList, showSearch])
 
-  console.log("Posts: ", data)
+  // console.log("Posts: ", data)
 
-  console.log("searchQueryList: ", searchQueryList)
+  // console.log("searchQueryList: ", searchQueryList)
   return (
     <div className='mt-16 prompt_layout'>
       {
@@ -51,14 +51,13 @@ const Feed = () => {
   const handleSearchChange = (e) => {
     setSearchText("");
     let searchedValue = e.target.value;
-    
-    setSearchText(searchedValue);
-    console.log("SearchText: ", searchText)
-    handleQuery(searchedValue, allPosts);
-    // console.log("AllPosts: ", allPosts)
+    // setSearchText(searchedValue);
+    // console.log("SearchText: ", searchText)
+    handleQuery(searchedValue, allPosts, false);
   }
 
   const displayResults = (searchQueryList, allPosts) => {
+    // searchQueryList === array of postIds
     let finalResults = []
     console.log("SearchQueryList: ", searchQueryList)
     searchQueryList?.forEach(query => {
@@ -69,33 +68,53 @@ const Feed = () => {
   };
 
   const handleQuery = (searchedValue, allPosts, tagClick) => {
-    if (tagClick === true) { 
+    setSearchText("");
+    // let searchedValue = e.target.value;
+    if (tagClick === false) { 
+    // will only run if directed from handleSearchChange
+      console.log("Search HIT:  ", searchedValue, tagClick)
+      setSearchText(searchedValue)
+      console.log("SearchText: ", searchText)
+      const searchTransformed = searchText.toLowerCase();
+      // console.log("handleTagClick", searchedValue)
+       
+      let tagIds = [];
+      for (let i = 0; i < allPosts.length; i++) {
+        allPosts[i].tagList.forEach(tag => {
+          if (tag === searchTransformed) {
+            tagIds.push(allPosts[i]._id);
+          } else {
+            console.log("Tag: ", tag);
+          }
+        });
+      }
+      const displayQuery = displayResults(tagIds, allPosts);
+      console.log("DisplayQuery: ", displayQuery)
+      setSearchQueryList(displayQuery);
+      return tagIds;
+    } else {
+      console.log("TagClick HIT")
       setSearchText("")
       const searchTransformed = searchedValue.tag.toLowerCase();
       setSearchText(searchedValue.tag)
-  } else {
-    setSearchText(searchedValue)
-    console.log("SearchedValue: ", searchText)
-    const searchTransformed = searchedValue.toLowerCase();
-    console.log("handleTagClick", searchedValue)
 
-  }
-    console.log("TAG Click: ", searchedValue.tag, tagClick)
-
-    let tagIds = [];
-    for (let i = 0; i < allPosts.length; i++) {
-      allPosts[i].tagList.forEach(tag => {
-        if (tag === searchTransformed) {
-          tagIds.push(allPosts[i]._id);
-        } else {
-          console.log("Tag: ", tag);
-        }
-      });
+      console.log("TAG Click: ", searchedValue.tag, tagClick)
+      
+      let tagIds = [];
+      for (let i = 0; i < allPosts.length; i++) {
+        allPosts[i].tagList.forEach(tag => {
+          if (tag === searchTransformed) {
+            tagIds.push(allPosts[i]._id);
+          } else {
+            console.log("Tag: ", tag);
+          }
+        });
+      }
+      const displayQuery = displayResults(tagIds, allPosts);
+      setSearchQueryList(displayQuery);
+      return tagIds;
     }
-    const displayQuery = displayResults(tagIds, allPosts);
-    setSearchQueryList(displayQuery);
     displayResults();
-    return tagIds;
     // console.log("TempArray: ", tempArray);
   
     // const tagIds = filteredPosts?.map(post => post._id);

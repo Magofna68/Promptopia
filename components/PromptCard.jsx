@@ -61,10 +61,10 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       >
         {
           post.tagList && post.tagList.length > 0 ?
-          post.tagList.map(tag => 
+          post.tagList.map((tag, index) => 
             // {console.log("Tag: ", tag)}
             // <li onClick={handleTagClick({tag})} key={tag}>#{tag}</li>)
-          <li onClick={(e) => handleTagClick && handleTagClick({tag})} key={tag}>#{tag}</li>)
+          <li onClick={(e) => handleTagClick && handleTagClick({tag})} key={index}>#{tag}</li>)
           :
           <li>{post.tag}</li>
         }
