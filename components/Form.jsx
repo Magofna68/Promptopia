@@ -25,27 +25,11 @@ const handleKeyDown = (e) => {
 
 const handleTagSubmit = (e) => {
   e.preventDefault();
-
-  // console.log("handleTagSubmit HIT", post.tag)
-  // console.log("Post", post)
   setPost({ ...post, tagList: [...post.tagList, post.tag], tag: ""})
-  // console.log("TAG & TAGS: ", post.tagList, post.tag)
-  // setPost({...post, tag: ""})
 }
 
-// let postData;
-// useEffect(() => {
-//   if (post.tagList) {
-//     console.log("UseEffect HIT")
-//     // post.tagList.map(tag => <Badge bg="primary" key={tag}>{tag}</Badge>);
-
-//     // setTagData(tags);
-//   }
-//   console.log("TAG Data: ", tagData)
-// }, [post.tagList])
-
   return (
-    <scection className="w-full max-w-full flex-start flex-col">
+    <section className="w-full max-w-full flex-start flex-col">
       <h1 className='head_text text-left'>
         <span className='blue_gradient'>{type} Post</span>
       </h1>
@@ -70,8 +54,8 @@ const handleTagSubmit = (e) => {
 
         <label>
           <span className='font-satoshi font-semibold text-base text-gray-700'>
-            Tag
-            <span> (#product, #webdevelopment, #idea)</span>
+            Add Tags
+            <span className='secondaryText'> (product, webdevelopment, etc.)</span>
           </span>
           <Stack direction='horizontal' gap={2}>
             { post && post.tagList && post.tagList.map(tag => <Badge key={tag} bg='primary'>{tag}</Badge>)}
@@ -82,8 +66,6 @@ const handleTagSubmit = (e) => {
                 <input
                   value={post.tag}
                   onKeyDown={handleKeyDown}
-                  // onSubmit={handleTagSubmit}
-                  // onClick={(e) => { setPost({...post, tagList: e.target.value})}}
                   onChange={(e) => { setPost({...post, tag: e.target.value}, console.log(post.tag))}}
                   placeholder='tag'
                   className='form_input'
@@ -91,14 +73,12 @@ const handleTagSubmit = (e) => {
                 </input>
                 :
                 <input
-                value={post.tag}
-                onKeyDown={handleKeyDown}
-                // onSubmit={handleTagSubmit}
-                // onClick={(e) => { setPost({...post, tagList: e.target.value})}}
-                onChange={(e) => { setPost({...post, tag: e.target.value}, console.log(post.tag))}}
-                placeholder='tag'
-                required
-                className='form_input'
+                  value={post.tag}
+                  onKeyDown={handleKeyDown}
+                  onChange={(e) => { setPost({...post, tag: e.target.value}, console.log(post.tag))}}
+                  placeholder='tag'
+                  required
+                  className='form_input'
                 />
               }
               <button onClick={(e) => handleTagSubmit(e)}><AddIcon /></button>
@@ -120,7 +100,7 @@ const handleTagSubmit = (e) => {
           </button>
         </div>
       </form>
-    </scection>
+    </section>
   )
 }
 

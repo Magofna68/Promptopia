@@ -2,12 +2,17 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+
 import Form from '@components/Form';
 
 const EditPrompt = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get('id')
+
+  var notyf = new Notyf();
 
   const [ submitting, setSubmitting ] = useState(false);
   const [ post, setPost ] = useState({
@@ -36,7 +41,8 @@ const EditPrompt = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    if (!promptId) return alert("Prompt ID not found")
+    if (!promptId) return notyf.error("Prompt ID not found")
+    // alert("Prompt ID not found")
 
     try{
       // api endpoint 
@@ -45,15 +51,19 @@ const EditPrompt = () => {
         method: 'PATCH',
         body: JSON.stringify({
           prompt: post.prompt,
-          tag: post.tag,
+          tag: post.tag || post.tagList[0],
           tagList: post.tagList,
         })
       })
 
       if (response.ok) {
-        router.push('/')
+        notyf.success("Prompt updated successfully")
+        setTimeout(() => {
+          router.push('/')
+        }, 1000)
       }
     } catch (error) {
+      notyf.error("Error Creating Prompt: ", error)
       console.log("Error Creating Prompt: ", error);
     } finally {
       // fire regardless of success or not

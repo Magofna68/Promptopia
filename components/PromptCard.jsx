@@ -57,19 +57,15 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       <p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
       <p 
         className='font-inter text-sm blue_gradient cursor-pointer d-flex flex ' 
-        // onClick={() => handleTagClick && handleTagClick(e)}
       >
         {
           post.tagList && post.tagList.length > 0 ?
           post.tagList.map((tag, index) => 
-            // {console.log("Tag: ", tag)}
-            // <li onClick={handleTagClick({tag})} key={tag}>#{tag}</li>)
           <li onClick={(e) => handleTagClick && handleTagClick({tag})} key={index}>#{tag}</li>)
           :
           <li>{post.tag}</li>
         }
       </p>
-      {/* {console.log('Session.user.Id: ', session.user.id, "post.creator.id: ", post.creator._id)} */}
       {session?.user?.id === post.creator?._id && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
           <p

@@ -2,12 +2,15 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
 import Form from '@components/Form';
 
 const CreatePrompt = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  var notyf = new Notyf();
 
   const [ submitting, setSubmitting ] = useState(false);
   const [ post, setPost ] = useState({
@@ -29,15 +32,19 @@ const CreatePrompt = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user.id,
-          tag: post.tag,
+          tag: post.tag || post.tagList[0],
           tagList: post.tagList,
         })
       })
 
       if (response.ok) {
-        router.push('/')
+        notyf.success('Your post has been created')
+        setTimeout(() => {
+          router.push('/')
+        }, 1000)
       }
     } catch (error) {
+      notyf.error('There was a issue creating your post')
       console.log("Error Creating Prompt: ", error);
     } finally {
       // fire regardless of success or not
