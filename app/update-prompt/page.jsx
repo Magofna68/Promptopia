@@ -42,7 +42,6 @@ const EditPrompt = () => {
     setSubmitting(true);
 
     if (!promptId) return notyf.error("Prompt ID not found")
-    // alert("Prompt ID not found")
 
     try{
       // api endpoint 

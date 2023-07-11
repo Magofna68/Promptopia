@@ -6,8 +6,6 @@ import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, useProviders, getProviders } from 'next-auth/react';
 
 const Nav = () => {
-  // const isUserLoggedIn = true;
-
   const { data: session } = useSession();
   const [ toggleDropdown, setToggleDropdown ] = useState(false);
   const [ providers, setProviders ] = useState(null);
@@ -54,13 +52,11 @@ const Nav = () => {
                 </button>
                 <Link href='/profile'>
                   <Image
-                    // src='/assets/images/logo.svg'
                     src={session?.user.image}
                     width={37}
                     height={37}
                     className='rounded-full'
                     alt='profile'
-                    // onClick={() => setToggleDropdown(prev => !prev)}
                   />
                 </Link>
               </div>
