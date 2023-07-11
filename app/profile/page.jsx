@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 // import { Notyf } from 'notyf';
 // import 'notyf/notyf.min.css';
 
-import Profile from '@components/profile';
+import Profile from '@components/Profile';
 
 const MyProfile = () => {
   const router = useRouter();
