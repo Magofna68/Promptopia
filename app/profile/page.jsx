@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css';
+// import { Notyf } from 'notyf';
+// import 'notyf/notyf.min.css';
 
 import Profile from '@components/profile';
 
@@ -14,7 +14,7 @@ const MyProfile = () => {
   const { data: session } = useSession();
   const [ posts, setPosts ] = useState([]);
 
-  var notyf = new Notyf();
+  // var notyf = new Notyf();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -41,9 +41,9 @@ const MyProfile = () => {
 
         const filteredPosts = posts.filter((p) => p._id !== post._id);
         setPosts(filteredPosts)
-        notyf.success("Post deleted")
+        // notyf.success("Post deleted")
       } catch (error) {
-        notyf.error("Post unable to be deleted")
+        // notyf.error("Post unable to be deleted")
         console.log("Error Deleting ", error)
       }
     }
