@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const webpack = require('webpack')
 
 const { parsed: myEnv } = require('dotenv').config({
@@ -24,11 +23,19 @@ const nextConfig = {
   },
 };
 
+const defaultEnv = {
+  GOOGLE_ID: process.env.GOOGLE_ID || 'default-google-id',
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || 'default-client-secret',
+  MONGODB_URI: process.env.MONGODB_URI || 'default-mongodb-uri',
+  NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'default-nextauth-url',
+  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'default-nextauth-secret',
+};
+
 // module.exports = nextConfig
 module.exports =  {
   ...nextConfig,
   webpack(config) {
-    config.plugins.push(new webpack.EnvironmentPlugin(myEnv))
+    config.plugins.push(new webpack.EnvironmentPlugin({ ...defaultEnv, ...myEnv }))
     return config
   }
 }
