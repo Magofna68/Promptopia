@@ -36,7 +36,7 @@ const defaultEnv = {
 module.exports =  {
   ...nextConfig,
   webpack(config) {
-    config.plugins.push(new webpack.EnvironmentPlugin({ ...defaultEnv, ...myEnv }))
+    config.plugins.push(new webpack.EnvironmentPlugin(defaultEnv))
     return config
   }
 }
