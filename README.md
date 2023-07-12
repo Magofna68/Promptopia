@@ -64,9 +64,9 @@ _I used Bootstrap / Material UI for styling purposes, and deployed this on Verce
 6. MongoDB 
 7. Material-UI/Core
 8. Vercel
-9. Notyf
-10. Mongoose
-11. TailwindCSS
+9. Mongoose
+10. TailwindCSS
+11. dotenv
 <br>
 
 ## Getting Started
