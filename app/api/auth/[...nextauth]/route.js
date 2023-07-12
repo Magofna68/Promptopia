@@ -49,6 +49,11 @@ const handler = NextAuth({
         return false, {error: 'failed to sign in'};
       }
     }
+  },
+  pages: {
+    error({error}) {
+      return <div>{error}</div>
+    }
   }
 })
 

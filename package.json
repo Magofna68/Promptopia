@@ -2,7 +2,7 @@
   "name": "promptopia",
   "version": "0.1.0",
   "private": false,
-  "homepage": "promptopia-sigma-eight.vercel.app",
+  "homepage": "https://main--stirring-cupcake-9abb6e.netlify.app/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
