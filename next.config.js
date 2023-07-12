@@ -1,8 +1,9 @@
 const webpack = require('webpack')
 
-const { parsed: myEnv } = require('dotenv').config({
-  path: './.env'
-});
+// const { parsed: myEnv } = require('dotenv').config({
+//   path: './.env'
+// });
+require('dotenv').config();
 
 const nextConfig = {
   experimental: {
