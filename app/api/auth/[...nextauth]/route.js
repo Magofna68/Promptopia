@@ -42,10 +42,11 @@ const handler = NextAuth({
         }
         // check if user already exists
         // if not, create new user and save to DB
-        return true;
+        // return true;
+        return profile;
       } catch (error) {
         console.log("Error signing in: ", error);
-        return false;
+        return false, {error: 'failed to sign in'};
       }
     }
   }
