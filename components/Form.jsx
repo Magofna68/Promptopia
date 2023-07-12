@@ -5,7 +5,6 @@ import Stack from 'react-bootstrap/Stack';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddIcon from '@mui/icons-material/Add';
 import { Add } from '@mui/icons-material';
-// import { chip } from @material-tailwind/react
 
 const Form = ({       
   type,

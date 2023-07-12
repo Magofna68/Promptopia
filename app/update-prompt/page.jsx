@@ -28,7 +28,7 @@ const EditPrompt = () => {
 
       setPost({
         prompt: data.prompt,
-        tag: data.tag,
+        tag: data.tag || data.tagList[0],
         tagList: data.tagList,
       })
     }
@@ -77,9 +77,7 @@ const EditPrompt = () => {
       setPost={setPost}
       submitting={submitting}
       handleSubmit={updatePrompt}
-    >
-
-    </Form>
+    />
   )
 }
 export default EditPrompt;
